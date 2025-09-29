@@ -11,8 +11,11 @@ import { Button } from "./button";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
-type CarouselOptions = UseCarouselParameters[0];
-type CarouselPlugin = UseCarouselParameters[1];
+// useEmblaCarousel's options shape is not easily inferred here due to the
+// versioned import and re-exports. Use a permissive object type so callers
+// can spread and read fields like `axis` safely.
+type CarouselOptions = Record<string, any> | undefined;
+type CarouselPlugin = any;
 
 type CarouselProps = {
   opts?: CarouselOptions;
